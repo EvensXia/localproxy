@@ -11,11 +11,10 @@ license = "MIT"
 
 [tool.poetry.dependencies]
 python = ">=3.8"
-click = "*"
 toml = "*"
 
 [tool.poetry.scripts]
-local_proxy = "localproxy.cli:cli"
+localproxy = "localproxy.cli:main"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"

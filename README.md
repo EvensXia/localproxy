@@ -50,22 +50,35 @@ pip install dist/localproxy-0.1.0-py3-none-any.whl
 
 - List existing proxy configurations:
 ```bash
-local_proxy list
+localproxy list
 ```
 
 - Set a proxy configuration:
 ```bash
-local_proxy set <protocol> <address>
+localproxy set <protocol> <address>
 ```
 Example:
 ```bash
-local_proxy set http http://localhost:8080
+localproxy set http http://localhost:8080
 ```
 
 
 - Clear all proxy configurations:
 ```bash
-local_proxy clear
+localproxy clear
+```
+
+- Run scripts/code/modules:
+```bash
+localproxy /path/to/your/script.py
+localproxy -c "import requests;print(requests.get('https://www.google.com'))"
+localproxy -m your.module
+```
+
+
+- Print CLI help:
+```bash
+localproxy -h
 ```
 
 ### Using the Proxy in Other Projects
@@ -79,7 +92,7 @@ from localproxy import proxy
 proxy.init()
 
 ```
-This will apply the proxy settings stored in ~/.local_proxy/proxy.toml to your environment variables.
+This will apply the proxy settings stored in ~/.localproxy/proxy.toml to your environment variables.
 
 ### Configuration
-Proxy configurations are stored in a TOML file located at ~/.local_proxy/proxy.toml. This file is managed automatically by the CLI commands.
+Proxy configurations are stored in a TOML file located at ~/.localproxy/proxy.toml. This file is managed automatically by the CLI commands.
