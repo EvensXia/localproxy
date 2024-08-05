@@ -79,17 +79,17 @@ def main():
                     "To run a Python script directly: \n"
                     "  localproxy <script.py> [args]\n\n"
                     "Sub-commands:")
+    subparsers = parser.add_subparsers(dest="command", help="Sub-commands", required=False)
+    run_parser = subparsers.add_parser("run", help="Run code/module")
+    run_parser.add_argument("-m", "--module", help="Module to run")
+    run_parser.add_argument("-c", "--code", help="Code to run")
 
-    subparsers = parser.add_subparsers(dest="command", help="Sub-commands")
     set_parser = subparsers.add_parser("set", help="Set a proxy configuration")
     set_parser.add_argument("protocol", type=str, help="Protocol to set (e.g., http, https)")
     set_parser.add_argument("address", type=str, help="Proxy address (e.g., http://proxy.example.com:8080)")
     set_parser.set_defaults(func=set_proxy)
     subparsers.add_parser("list", help="List existing proxy configurations").set_defaults(func=list_proxies)
     subparsers.add_parser("clear", help="Clear all proxy configurations").set_defaults(func=clear_proxies)
-    parser.add_argument("-m", "--module", nargs="+", help="Module to run")
-    parser.add_argument("-c", "--code", nargs="+", help="Code to run")
-
     if len(sys.argv) > 1 and sys.argv[1].endswith(".py"):
         original_args = sys.argv[1:]
         run_script(original_args[0], original_args[1:])
@@ -97,12 +97,15 @@ def main():
         args, _ = parser.parse_known_args()
         if args.command == "set":
             set_proxy(args.protocol, args.address)
-        elif args.command:
+        elif args.command in ["list", "clear"]:
             args.func()
-        elif args.module:
-            run_module(args.module[0], args.module[1:])
-        elif args.code:
-            run_code(args.code[0], args.code[1:])
+        elif args.command == "run":
+            if args.module:
+                run_module(args.module, sys.argv[4:])
+            elif args.code:
+                run_code(args.code, sys.argv[4:])
+            else:
+                parser.print_help()
         else:
             parser.print_help()
 

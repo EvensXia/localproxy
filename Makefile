@@ -10,7 +10,7 @@ install:
 # Format code using isort and autopep8
 format:
 	poetry run isort .
-	poetry run autopep8 --in-place --aggressive --aggressive -r .
+	poetry run autopep8 --max-line-length 120 --in-place --aggressive --aggressive -r . 
 
 # Check if virtual environment is active
 venv:
