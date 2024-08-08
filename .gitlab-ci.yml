@@ -28,6 +28,6 @@ build:
 deploy:
   stage: deploy
   script:
-    - poetry publish --username __token__ --password $TWINE_PASSWORD --build
+    - twine upload --skip-existing dist/* -u __token__ -p $TWINE_PASSWORD
   only:
     - main
