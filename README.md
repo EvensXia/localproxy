@@ -1,5 +1,7 @@
 # LocalProxy
 
+![Pipeline Status](https://gitlab.evensxia.com/EvensXia/localproxy/badges/main/pipeline.svg)
+
 LocalProxy is a Python command-line tool for managing and applying proxy configurations. It allows you to set, list, and clear proxy settings, which are stored in a configuration file and can be easily applied to your environment.
 
 ## Features
@@ -10,6 +12,11 @@ LocalProxy is a Python command-line tool for managing and applying proxy configu
 - Apply proxy settings to the environment in other projects
 
 ## Installation
+
+### from pypi
+```bash
+pip3 install pylocalproxy
+```
 
 ### Prerequisites
 
